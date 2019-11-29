@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,9 +77,13 @@ public class CatalogActivity extends AppCompatActivity {
                 PetEntry.COLUMN_PET_WEIGHT};
 
         Cursor cursor = getContentResolver().query(PetEntry.CONTENT_URI,projection,null,null,null);
-        TextView displayView = findViewById(R.id.text_view_pet);
+        ListView listView = findViewById(R.id.list_view_pet);
+        PetCursorAdapter mPetCursorAdapter = new PetCursorAdapter(this,cursor);
+        listView.setAdapter(mPetCursorAdapter);
 
+        /** old code
         try {
+
             // Display the number of rows in the Cursor (which reflects the number of rows in the
             // pets table in the database).
             displayView.setText("the pets table contains " + cursor.getCount() + " pets.");
@@ -98,12 +103,14 @@ public class CatalogActivity extends AppCompatActivity {
                 int currentGender = cursor.getInt(genderColumnIndex);
                 int currentWeight = cursor.getInt(weightColumnIndex);
                 displayView.append("\n" + currentId + " - " + currentName + " - " + currentBreed + " - " + currentGender + " - " + currentWeight);
+
             }
         } finally {
             // Always close the cursor when you're done reading from it. This releases all its
             // resources and makes it invalid.
             cursor.close();
         }
+         */
     }
 
     private void insertPet(){
