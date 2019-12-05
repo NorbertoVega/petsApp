@@ -179,6 +179,7 @@ public class PetProvider extends ContentProvider {
                 selection = PetEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
                 deleted = database.delete(PetEntry.TABLE_NAME, selection, selectionArgs);
+                getContext().getContentResolver().notifyChange(uri, null);
                 return deleted;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);

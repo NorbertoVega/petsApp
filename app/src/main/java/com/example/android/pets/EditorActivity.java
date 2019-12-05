@@ -232,7 +232,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private void deletePet() {
         if(mCurrentUri != null) {
             int deletedRows = getContentResolver().delete(mCurrentUri, null, null);
-            getContentResolver().notifyChange(mCurrentUri, null);
             Log.v("EditorActivity: ", "number of deleted rows: " + deletedRows);
             if (deletedRows == 0)
                 Toast.makeText(this, R.string.editor_delete_pet_failed, Toast.LENGTH_SHORT).show();
